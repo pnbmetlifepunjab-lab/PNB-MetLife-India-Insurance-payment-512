@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNB Style Payment Page</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background: linear-gradient(135deg,#8B0000,#FFC72C);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    background:white;
+    width:90%;
+    max-width:400px;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    box-sizing:border-box;
+}
+
+h2{
+    text-align:center;
+    color:#8B0000;
+    margin-bottom:15px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    box-sizing:border-box;
+    font-size:14px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.primary-btn{
+    background:#8B0000;
+    color:white;
+}
+
+.download-btn{
+    background:#FFC72C;
+    color:black;
+}
+
+.hidden{
+    display:none;
+}
+
+.qr-img{
+    width:100%;
+    max-width:260px;
+    display:block;
+    margin:15px auto;
+}
+
+.upi-box{
+    background:#fff8dc;
+    padding:12px;
+    border-radius:10px;
+    margin-top:15px;
+    border:1px solid #FFC72C;
+    font-size:14px;
+}
+
+@media (max-width:400px){
+    .container{
+        padding:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="container" id="page1">
+<h2>PNB MetLife India Insurance</h2>
+
+<input type="text" placeholder="Name">
+<input type="text" placeholder="Mobile Number">
+<input type="text" placeholder="Policy Number">
+<input type="number" placeholder="Premium Amount">
+
+<button class="primary-btn" onclick="goToPage2()">Pay Now</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="container hidden" id="page2">
+<h2>Scan & Pay</h2>
+
+<img id="qrImage" class="qr-img" alt="QR Code">
+
+<div class="upi-box">
+<p><b>पेमेंट करके स्क्रीनशॉट अपलोड करें और अपना रिसिप्ट प्राप्त करें</b></p>
+
+<input type="file" id="screenshot" accept="image/*">
+
+<button class="download-btn" onclick="showError()">Download PDF Receipt</button>
+</div>
+</div>
+
+<script>
+
+function goToPage2(){
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+    loadQR();
+}
+
+function loadQR(){
+    var timestamp = new Date().getTime();
+    document.getElementById("qrImage").src = "pnb-metlife.png?v=" + timestamp;
+}
+
+function showError(){
+    alert("Please upload payment screenshot first");
+}
+
+</script>
+
+</body>
+</html>
